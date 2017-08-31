@@ -50,8 +50,9 @@ export class BoundItem {
         }
         element.addEventListener(eventName, (evt) => {
             let newValue = element.value;
-            let cmd = expression + '=\'' + newValue + '\''; // 对 expression 表示的变量重新赋值，例如：cmd = "vm_6282.message= "hello, SegmentFaulta""
+            let cmd = expression + '=\'' + newValue + '\''; // 对 expression 表示的变量重新赋值，例如：cmd = "vm.message= 'hello, SegmentFaulta'"
             try {
+                // 执行脚本语句，将触发 viewModel 中相应的 set 方法
                 eval(cmd);
             } catch (error) {
                 console.error(error);
