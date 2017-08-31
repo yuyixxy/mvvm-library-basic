@@ -27,7 +27,7 @@ export class BoundItem {
         },
         'SELECT': 'change',
         'TEXTAREA': 'change'
-    }
+    };
     constructor(viewModel: object, element: Element, expression: string, attributeName: string) {
         this.viewModel = viewModel;
         this.element = element;

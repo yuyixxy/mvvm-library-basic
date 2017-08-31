@@ -28,7 +28,7 @@ export class BoundItem {
             },
             'SELECT': 'change',
             'TEXTAREA': 'change'
-        }
+        };
         this._addListener(this.element, this.expression);
     }
     /**
