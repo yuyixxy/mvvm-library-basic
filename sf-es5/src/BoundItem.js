@@ -1,5 +1,5 @@
 function BoundItem (viewModel, element, expression, attributeName) {
-    this.viewModel = view;
+    this.viewModel = viewModel;
     this.element = element;
     this.expression = expression;
     this.attributeName = attributeName;
@@ -30,6 +30,33 @@ function BoundItem (viewModel, element, expression, attributeName) {
     };
     this.addListener(this.element, this.expression);
 }
+/**
+ * 给元素绑定事件
+ * 
+ * @param {any} element 
+ * @param {any} expression 
+ */
 BoundItem.prototype.addListener = function (element, expression) {
-
+    var tagName = element.tagName; // 元素标签名称，大写
+    var eventName = this.interactiveDomConfig[tagName];
+    if (!eventName) {
+        return;
+    }
+    if (typeof eventName === 'object') {
+        var type = element.getAttribute('type');
+        eventName = eventName[type];
+    }
+    element.addEventListener(eventName, (evt) => {
+        var newValue = element.value;
+        // 对 expression 表示的变量重新赋值，例如：cmd = "vm.message= 'hello, SegmentFaulta'"
+        var cmd = expression + '=\'' + newValue + '\'';
+        try {
+            // 执行脚本语句，将触发 viewModel 中相应的 set 方法
+            eval(cmd);
+        } catch (error) {
+            console.error(error);
+        }
+    });
 };
+
+module.exports = BoundItem;
