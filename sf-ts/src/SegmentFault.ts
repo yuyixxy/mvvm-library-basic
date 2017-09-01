@@ -16,7 +16,7 @@ export default class SegmentFault {
         let scanner = new Scanner(this.viewModelPool);
         let watcher = new Watcher(this);
         // step 1: 暗中观察各个viewModel
-        for (var key in this.viewModelPool) {
+        for (let key in this.viewModelPool) {
             watcher.observe(this.viewModelPool[key], this.viewModelChangedHandler);
         }
         // step 2 3: 扫描DOM Tree并返回Map

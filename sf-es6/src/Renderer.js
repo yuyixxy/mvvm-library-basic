@@ -29,7 +29,7 @@ export class Renderer {
             let tempScope = {};
             tempScope[alias] = viewModel;
             try {
-                var pattern = new RegExp('\\b' + alias + '\\b', 'gm');
+                let pattern = new RegExp('\\b' + alias + '\\b', 'gm');
                 expression = expression.replace(pattern, 'tempScope.' + alias);
                 let result = eval(expression);
                 tempScope = null;
